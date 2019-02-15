@@ -12,25 +12,25 @@ steps:
   - ./gradlew :appcompat-theme-android:clean :appcompat-theme-android:build
   - ./gradlew :app:clean :app:build
 
-- name: snapshot
-  image: runmymind/docker-android-sdk
-  volumes:
-  - name: gradle
-    path: /root/.gradle
-  environment:
-    PUBLISH_TO_JFROG: true
-    BINTRAY_USER:
-      from_secret: BINTRAY_USER
-    BINTRAY_API_KEY:
-      from_secret: BINTRAY_API_KEY
-    VERSION_CODE: ${DRONE_BUILD_NUMBER}
-    VERSION_NAME: 0.0.1-SNAPSHOT
-  commands:
-  - ./gradlew :appcompat-android:clean :appcompat-android:install :appcompat-android:artifactoryPublish
-  - ./gradlew :appcompat-theme-android:clean :appcompat-theme-android:install :appcompat-theme-android:artifactoryPublish
-  when:
-    event:
-    - push
+#- name: snapshot
+#  image: runmymind/docker-android-sdk
+#  volumes:
+#  - name: gradle
+#    path: /root/.gradle
+#  environment:
+#    PUBLISH_TO_JFROG: true
+#    BINTRAY_USER:
+#      from_secret: BINTRAY_USER
+#    BINTRAY_API_KEY:
+#      from_secret: BINTRAY_API_KEY
+#    VERSION_CODE: ${DRONE_BUILD_NUMBER}
+#    VERSION_NAME: 0.0.1-SNAPSHOT
+#  commands:
+#  - ./gradlew :appcompat-android:clean :appcompat-android:install :appcompat-android:artifactoryPublish
+#  - ./gradlew :appcompat-theme-android:clean :appcompat-theme-android:install :appcompat-theme-android:artifactoryPublish
+#  when:
+#    event:
+#    - push
 
 - name: release
   image: runmymind/docker-android-sdk
